@@ -1,0 +1,10 @@
+---
+import FormattedDate from './FormattedDate.astro';
+interface Props { category: string; date: Date }
+const { category, date } = Astro.props;
+---
+<div class="flex flex-wrap items-center gap-x-2.5 text-sm text-studio-ink/70">
+	<span>{category}</span>
+	<span aria-hidden="true">·</span>
+	<FormattedDate {date} />
+</div>

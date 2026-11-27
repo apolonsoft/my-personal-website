@@ -1,50 +1,42 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Page from '../layouts/Page.astro';
+import Icon from '../components/Icon.astro';
+import PostMeta from '../components/PostMeta.astro';
+import Skills from '../components/Skills';
+import { profile } from '../consts';
+import { getPosts } from '../lib/posts';
+
+const recentPosts = (await getPosts()).slice(0, 2);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Page>
+	<section aria-labelledby="intro" class="pt-16 sm:pt-24">
+		<h1 id="intro" class="display">Developer by trade.<br />Designer at heart.</h1>
+		<p class="lead mt-7 max-w-[580px] sm:mt-8">{profile.introduction}</p>
+	</section>
+
+	<section id="skills" aria-labelledby="skills-title" class="mt-18 scroll-mt-10 sm:mt-24">
+		<h2 id="skills-title" class="section-title">What I do</h2>
+		<Skills />
+	</section>
+
+	<section aria-labelledby="writing-title" class="mt-18 sm:mt-24">
+		<div class="flex items-baseline justify-between gap-4">
+			<h2 id="writing-title" class="section-title">Recent writing</h2>
+			<a href="/blog/" class="text-link inline-flex shrink-0 items-center gap-2 font-medium">All posts <Icon name="arrow" size={18} /></a>
+		</div>
+		<ul class="mt-8 grid gap-9 sm:grid-cols-2 sm:gap-8">
+			{recentPosts.map(({ id, data }) => (
+				<li>
+					<a href={`/blog/${id}/`} class="group block">
+						<img class="aspect-video w-full rounded-xl object-cover" src={data.heroImage} width="1280" height="720" alt="" loading="lazy" />
+						<div class="mt-4"><PostMeta category={data.category} date={data.pubDate} /></div>
+						<h3 class="mt-2 flex items-baseline justify-between gap-4 text-2xl leading-tight font-semibold tracking-tight group-hover:underline">
+							{data.title}<span class="shrink-0"><Icon name="arrow-up-right" size={18} /></span>
+						</h3>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
+</Page>
