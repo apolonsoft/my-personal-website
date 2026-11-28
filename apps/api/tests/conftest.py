@@ -12,6 +12,7 @@ from sqlmodel import Session, SQLModel, create_engine
 import src.models  # noqa: F401 - ensure SQLModel metadata includes all tables
 from src.database import get_session
 from src.main import app
+from src.storage import InMemoryImageStorage, get_storage
 
 
 @pytest.fixture(autouse=True)
@@ -44,14 +45,24 @@ def session(db_engine: Engine) -> Generator[Session, None, None]:
 
 
 @pytest.fixture()
-def client(db_engine: Engine) -> Generator[TestClient, None, None]:
-    """Return a FastAPI TestClient wired to the isolated in-memory SQLite engine."""
+def image_storage() -> InMemoryImageStorage:
+    """Return an isolated in-memory R2 storage fake per test."""
+    return InMemoryImageStorage()
+
+
+@pytest.fixture()
+def client(
+    db_engine: Engine,
+    image_storage: InMemoryImageStorage,
+) -> Generator[TestClient, None, None]:
+    """Return a FastAPI TestClient wired to in-memory SQLite and R2 fake."""
 
     def _override_session() -> Generator[Session, None, None]:
         with Session(db_engine) as db_session:
             yield db_session
 
     app.dependency_overrides[get_session] = _override_session
+    app.dependency_overrides[get_storage] = lambda: image_storage
     try:
         with TestClient(app) as test_client:
             yield test_client

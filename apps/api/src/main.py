@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.routers import health, posts
+from src.routers import health, images, posts
 
 app = FastAPI(
     title="Personal Website Blog CMS API",
@@ -20,6 +20,7 @@ app.add_middleware(
 
 app.include_router(health.router)
 app.include_router(posts.router)
+app.include_router(images.router)
 
 try:
     from workers import asgi

@@ -1,5 +1,5 @@
 ### Task 05: Cloudflare R2 Image Storage API
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Implement the Cloudflare R2 object storage abstraction (`src/storage.py`) and the `/api/images` REST router (`src/routers/images.py`) for uploading, streaming, and deleting blog images stored in R2 and indexed in D1 (`ImageAsset`), plus complete pytest coverage using an in-memory R2 fake.
