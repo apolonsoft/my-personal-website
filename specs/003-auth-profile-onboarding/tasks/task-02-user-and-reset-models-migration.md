@@ -1,5 +1,5 @@
 ### Task 02: User & PasswordResetToken Models + Alembic/D1 Migration 0002
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Add `User` and `PasswordResetToken` SQLModel tables and Auth/Profile Pydantic DTOs to `apps/api/src/models.py`, create Alembic revision `0002_auth_and_profile.py`, and export `apps/api/migrations_d1/0002_auth_and_profile.sql`.
