@@ -1,5 +1,5 @@
 ### Task 03: Dual JWT/Token Auth & Cloudflare Email Sending Service
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Upgrade `apps/api/src/auth.py` so admin endpoints accept either `API_ADMIN_TOKEN` or a valid admin JWT, add `get_current_user` dependency for JWT-authenticated routes, implement `apps/api/src/email_service.py` using Cloudflare's `send_email` binding (`env.EMAIL`) with local console and test fakes, and configure `send_email` in `apps/api/wrangler.jsonc`.

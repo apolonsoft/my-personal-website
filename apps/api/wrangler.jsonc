@@ -11,8 +11,16 @@
 	},
 	"vars": {
 		"ENVIRONMENT": "production",
-		"R2_PUBLIC_BASE_URL": ""
+		"R2_PUBLIC_BASE_URL": "",
+		"EMAIL_FROM": "noreply@apolonsoft.dev",
+		"EMAIL_FROM_NAME": "Apolonsoft",
+		"FRONTEND_URL": "https://www.apolonsoft.dev"
 	},
+	"send_email": [
+		{
+			"name": "EMAIL"
+		}
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",
