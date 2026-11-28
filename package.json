@@ -13,6 +13,7 @@
 		"dev:web": "npm run dev --workspace=apps/web",
 		"db:migrate:local": "cd apps/api && npx wrangler d1 migrations apply personal-website-db --local",
 		"seed:local": "cd apps/api && API_ADMIN_TOKEN=dev-secret-token uv run python scripts/seed_posts.py --api-url http://127.0.0.1:8787",
+		"seed:admin:local": "cd apps/api && uv run python scripts/seed_admin.py --api-url http://127.0.0.1:8787",
 		"build": "npm run build --workspace=apps/web",
 		"build:web": "npm run build --workspace=apps/web",
 		"check": "npm run check --workspace=apps/web",

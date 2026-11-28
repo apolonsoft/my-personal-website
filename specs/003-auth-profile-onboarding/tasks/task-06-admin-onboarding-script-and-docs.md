@@ -1,5 +1,5 @@
 ### Task 06: Headless Admin Onboarding Script & Documentation
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Create an idempotent CLI script (`apps/api/scripts/seed_admin.py`) for headless default admin user onboarding, add unit tests (`apps/api/tests/test_seed_admin.py`), add a `seed:admin:local` npm script to root `package.json`, and document `JWT_SECRET`, admin onboarding, and Cloudflare Email Sending setup in `README.md`.

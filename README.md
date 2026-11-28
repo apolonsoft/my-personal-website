@@ -45,12 +45,13 @@ This starts:
 
 *(You can also run them individually with `npm run dev:api` and `npm run dev:web`.)*
 
-### 3. Seed Existing Markdown Posts & Images
+### 3. Seed Existing Markdown Posts, Images & Default Admin
 
 With `npm run dev` running in another terminal:
 
 ```bash
 npm run seed:local
+npm run seed:admin:local
 ```
 
 Or run backend tests:
@@ -58,6 +59,15 @@ Or run backend tests:
 ```bash
 cd apps/api && uv run pytest -v
 ```
+
+---
+
+## Auth, Password Reset & Profile Endpoints
+
+- `GET /api/auth/onboarding/status` & `POST /api/auth/onboarding` (one-time admin setup)
+- `POST /api/auth/login` (returns `HS256` JWT accepted by `/api/posts`, `/api/images`, `/api/profile/me`)
+- `POST /api/auth/forgot-password` & `POST /api/auth/reset-password` (Cloudflare `send_email` in production, console log in local dev)
+- `GET /api/profile`, `GET /api/profile/me`, `PATCH /api/profile/me`
 
 ---
 
@@ -94,10 +104,16 @@ Before the first live deployment:
    ```bash
    npx wrangler r2 bucket create personal-website-images
    ```
-3. **Set Production Admin Token** on the API Worker:
+3. **Set Production Secrets** on the API Worker:
    ```bash
-   cd apps/api && npx wrangler secret put API_ADMIN_TOKEN
+   cd apps/api
+   npx wrangler secret put API_ADMIN_TOKEN
+   npx wrangler secret put JWT_SECRET
    ```
-4. **Add GitHub Repository Secrets** (`Settings -> Secrets and variables -> Actions`):
+4. **Enable Cloudflare Email Sending** for your domain (for password-reset emails):
+   ```bash
+   npx wrangler email sending enable apolonsoft.dev
+   ```
+5. **Add GitHub Repository Secrets** (`Settings -> Secrets and variables -> Actions`):
    - `CLOUDFLARE_API_TOKEN` (with Workers Scripts Edit, D1 Edit, and Workers R2 Storage Edit permissions)
    - `CLOUDFLARE_ACCOUNT_ID`
