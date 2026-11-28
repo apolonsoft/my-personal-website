@@ -99,6 +99,11 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: uv run pywrangler deploy
 
+      - name: Build Astro Frontend Worker
+        env:
+          ASTRO_TELEMETRY_DISABLED: "1"
+        run: npm run build --workspace=apps/web
+
       - name: Deploy Astro Frontend Worker
         env:
           ASTRO_TELEMETRY_DISABLED: "1"
