@@ -78,7 +78,7 @@ class InMemoryImageStorage:
         return self._objects.pop(key, None) is not None
 
 
-def get_storage(request: Request) -> ImageStorage:
+async def get_storage(request: Request) -> ImageStorage:
     """Resolve the R2 bucket binding from the Cloudflare Worker environment."""
     env = request.scope.get("env")
     bucket = getattr(env, "IMAGES_BUCKET", None) if env is not None else None

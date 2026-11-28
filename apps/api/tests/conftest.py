@@ -9,10 +9,10 @@ from sqlalchemy import Engine
 from sqlalchemy.pool import StaticPool
 from sqlmodel import Session, SQLModel, create_engine
 
-import src.models  # noqa: F401 - ensure SQLModel metadata includes all tables
-from src.database import get_session
-from src.main import app
-from src.storage import InMemoryImageStorage, get_storage
+import models  # noqa: F401 - ensure SQLModel metadata includes all tables
+from database import get_session
+from main import app
+from storage import InMemoryImageStorage, get_storage
 
 
 @pytest.fixture(autouse=True)

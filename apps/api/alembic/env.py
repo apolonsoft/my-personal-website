@@ -6,7 +6,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 from sqlmodel import SQLModel
 
-import src.models  # noqa: F401 - register SQLModel tables with metadata
+import models  # noqa: F401 - register SQLModel tables with metadata
 
 config = context.config
 

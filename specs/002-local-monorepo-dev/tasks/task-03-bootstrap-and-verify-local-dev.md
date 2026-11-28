@@ -1,5 +1,5 @@
 ### Task 03: Bootstrap Local Env, Migrate D1, Seed & Verify E2E
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Create `apps/api/.dev.vars`, apply local D1 migrations, start both local servers, seed the 4 existing Markdown posts and images into local D1 + R2, and verify both API and Astro SSR endpoints respond with live data.

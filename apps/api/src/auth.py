@@ -6,7 +6,7 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from src.config import get_settings
+from config import get_settings
 
 _bearer_scheme = HTTPBearer(auto_error=False)
 
@@ -24,7 +24,7 @@ def is_admin_authenticated(
     return hmac.compare_digest(credentials.credentials, settings.api_admin_token)
 
 
-def require_admin(
+async def require_admin(
     request: Request,
     credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(_bearer_scheme)],
 ) -> None:

@@ -19,11 +19,11 @@ from fastapi import (
 )
 from sqlmodel import Session, select
 
-from src.auth import require_admin
-from src.config import get_settings
-from src.database import get_session
-from src.models import ImageAsset, ImageAssetRead
-from src.storage import ImageStorage, get_storage
+from auth import require_admin
+from config import get_settings
+from database import get_session
+from models import ImageAsset, ImageAssetRead
+from storage import ImageStorage, get_storage
 
 router = APIRouter(prefix="/api/images", tags=["images"])
 

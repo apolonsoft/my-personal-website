@@ -206,6 +206,8 @@ apps/web/dist/
 
 ### Python / uv / SQLite ###
 **/.venv/
+**/.venv-workers/
+apps/api/python_modules/
 **/__pycache__/
 *.py[cod]
 .pytest_cache/

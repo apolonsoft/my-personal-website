@@ -6,10 +6,10 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response,
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlmodel import Session, select
 
-from src.auth import is_admin_authenticated, require_admin
-from src.config import get_settings
-from src.database import get_session
-from src.models import (
+from auth import is_admin_authenticated, require_admin
+from config import get_settings
+from database import get_session
+from models import (
     ImageAsset,
     Post,
     PostCreate,
@@ -56,7 +56,7 @@ def _validate_image_asset_exists(session: Session, object_key: Optional[str]) ->
 
 
 @router.get("", response_model=list[PostRead])
-def list_posts(
+async def list_posts(
     request: Request,
     session: Annotated[Session, Depends(get_session)],
     credentials: Annotated[Optional[HTTPAuthorizationCredentials], Depends(_optional_bearer)],
@@ -84,7 +84,7 @@ def list_posts(
 
 
 @router.get("/{slug}", response_model=PostRead)
-def get_post(
+async def get_post(
     slug: str,
     request: Request,
     session: Annotated[Session, Depends(get_session)],
@@ -100,7 +100,7 @@ def get_post(
 
 
 @router.post("", response_model=PostRead, status_code=status.HTTP_201_CREATED)
-def create_post(
+async def create_post(
     payload: PostCreate,
     request: Request,
     session: Annotated[Session, Depends(get_session)],
@@ -141,7 +141,7 @@ def create_post(
 
 
 @router.patch("/{slug}", response_model=PostRead)
-def update_post(
+async def update_post(
     slug: str,
     payload: PostUpdate,
     session: Annotated[Session, Depends(get_session)],
@@ -178,7 +178,7 @@ def update_post(
 
 
 @router.delete("/{slug}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(
+async def delete_post(
     slug: str,
     session: Annotated[Session, Depends(get_session)],
     _admin: Annotated[None, Depends(require_admin)],

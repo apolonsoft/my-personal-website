@@ -10,7 +10,7 @@ def create_app() -> Any:
     from fastapi import FastAPI
     from fastapi.middleware.cors import CORSMiddleware
 
-    from src.routers import health, images, posts
+    from routers import health, images, posts
 
     application = FastAPI(
         title="Personal Website Blog CMS API",

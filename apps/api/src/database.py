@@ -1,6 +1,6 @@
 """Dual database engine supporting Cloudflare D1 bindings and local SQLite."""
 
-from collections.abc import Generator
+from collections.abc import AsyncGenerator
 from functools import lru_cache
 
 from fastapi import Request
@@ -8,7 +8,7 @@ from sqlalchemy import Engine
 from sqlalchemy_cloudflare_d1 import create_engine_from_binding
 from sqlmodel import Session, create_engine
 
-from src.config import get_settings
+from config import get_settings
 
 
 @lru_cache(maxsize=4)
@@ -33,7 +33,7 @@ def get_engine_for_request(request: Request) -> Engine:
     return _get_local_engine(settings.database_url)
 
 
-def get_session(request: Request) -> Generator[Session, None, None]:
+async def get_session(request: Request) -> AsyncGenerator[Session, None]:
     """Yield a SQLModel Session bound to the resolved database engine."""
     engine = get_engine_for_request(request)
     with Session(engine) as session:

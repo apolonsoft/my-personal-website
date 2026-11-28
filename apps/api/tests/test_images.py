@@ -2,7 +2,7 @@
 
 from fastapi.testclient import TestClient
 
-from src.routers.images import MAX_IMAGE_BYTES
+from routers.images import MAX_IMAGE_BYTES
 
 AUTH_HEADERS = {"Authorization": "Bearer test-admin-token"}
 SAMPLE_PNG = b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01"
