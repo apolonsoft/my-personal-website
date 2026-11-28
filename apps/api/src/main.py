@@ -10,6 +10,7 @@ def create_app() -> Any:
     from fastapi import FastAPI
     from fastapi.middleware.cors import CORSMiddleware
 
+    from routers import auth as auth_router
     from routers import health, images, posts
 
     application = FastAPI(
@@ -26,6 +27,7 @@ def create_app() -> Any:
     )
 
     application.include_router(health.router)
+    application.include_router(auth_router.router)
     application.include_router(posts.router)
     application.include_router(images.router)
     return application

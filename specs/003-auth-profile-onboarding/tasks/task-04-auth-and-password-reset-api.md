@@ -1,5 +1,5 @@
 ### Task 04: Auth, Onboarding & Password Reset API Router
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Implement `/api/auth` endpoints (`GET /api/auth/onboarding/status`, `POST /api/auth/onboarding`, `POST /api/auth/login`, `POST /api/auth/forgot-password`, `POST /api/auth/reset-password`) in `apps/api/src/routers/auth.py`, register the router in `apps/api/src/main.py`, and add comprehensive pytest integration tests in `apps/api/tests/test_auth.py`.
