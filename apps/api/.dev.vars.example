@@ -1,0 +1,3 @@
+API_ADMIN_TOKEN=dev-secret-token
+DATABASE_URL=sqlite:///./local.db
+R2_PUBLIC_BASE_URL=

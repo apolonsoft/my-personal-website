@@ -1,0 +1,23 @@
+[project]
+name = "my-personal-website-api"
+version = "0.1.0"
+description = "FastAPI + SQLModel Blog CMS backend running on Cloudflare Python Workers"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115.0",
+    "sqlmodel>=0.0.22",
+    "alembic>=1.14.0",
+    "sqlalchemy-cloudflare-d1>=0.3.0",
+    "python-multipart>=0.0.12",
+]
+
+[dependency-groups]
+dev = [
+    "workers-py",
+    "pytest>=8.3.0",
+    "httpx>=0.28.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

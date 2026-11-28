@@ -1,5 +1,5 @@
 ### Task 02: FastAPI Python Worker Scaffold & Config
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Create the `apps/api/` Python Worker project scaffold targeting Cloudflare Python Workers (Pyodide, Python 3.12), including dependency management via `uv`, Wrangler configuration with D1 and R2 bindings, environment/secret settings, Bearer token authentication dependency, ASGI entrypoint (`workers.asgi`), and the `/api/health` endpoint with its first `pytest` test suite.
