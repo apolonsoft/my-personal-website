@@ -12,4 +12,4 @@
 - [x] **Task 05**: [Cloudflare R2 Image Storage API](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-05-r2-images-api.md)
 - [x] **Task 06**: [Content Migration & Seeding Script](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-06-seed-existing-posts.md)
 - [x] **Task 07**: [Astro Frontend Integration with FastAPI CMS](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-07-astro-cms-integration.md)
-- [ ] **Task 08**: [GitHub Actions CI/CD Auto-Deploy on Git Push](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-08-github-actions-deploy.md)
+- [x] **Task 08**: [GitHub Actions CI/CD Auto-Deploy on Git Push](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-08-github-actions-deploy.md)

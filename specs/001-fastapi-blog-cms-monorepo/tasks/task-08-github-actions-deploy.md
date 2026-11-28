@@ -1,5 +1,5 @@
 ### Task 08: GitHub Actions CI/CD Auto-Deploy on Git Push
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Create the GitHub Actions workflow `.github/workflows/deploy.yml` so every `git push` to `main` automatically validates both the Python FastAPI backend (`pytest`) and Astro frontend (`npm run check`), applies pending D1 SQL migrations remotely, and deploys `apps/api` and `apps/web` to Cloudflare Workers. Also document local development, seeding, and required secrets in `README.md`.

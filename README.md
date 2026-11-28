@@ -1,64 +1,103 @@
-# Astro Starter Kit: Blog
+# Personal Website Monorepo (Astro + FastAPI on Cloudflare)
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
+A Cloudflare-native monorepo containing:
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+- **`apps/web`** — Astro 5 + React + Tailwind CSS frontend Worker connected to the backend via a Cloudflare Service Binding (`env.API`).
+- **`apps/api`** — Python 3.12 + FastAPI + SQLModel + Alembic Blog CMS backend running on Cloudflare Python Workers (ASGI), backed by **Cloudflare D1** (SQLite) and **Cloudflare R2** (image storage).
 
-<!-- dash-content-start -->
+---
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
+## Project Structure
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-- ✅ Built-in Observability logging
-
-<!-- dash-content-end -->
-
-## Getting Started
-
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
-
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/astro-blog-starter-template
+```text
+my-personal-website/
+├── .github/workflows/deploy.yml   # CI/CD: test, migrate D1, deploy api + web on push to main
+├── apps/
+│   ├── web/                       # Astro SSR Worker
+│   └── api/                       # FastAPI + SQLModel + Alembic + D1 + R2 Worker
+├── specs/                         # Spec-Kit specifications and task plans
+└── package.json                   # Root npm workspace orchestrator
 ```
 
-A live public deployment of this template is available at [https://astro-blog-starter-template.templates.workers.dev](https://astro-blog-starter-template.templates.workers.dev)
+---
 
-## 🚀 Project Structure
+## Local Development
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### 1. Start the FastAPI Backend (`apps/api`)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+cd apps/api
+cp .dev.vars.example .dev.vars
+uv sync
+uv run pywrangler dev
+```
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+Or run backend tests:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```bash
+cd apps/api
+uv run pytest -v
+```
 
-## 🧞 Commands
+### 2. Start the Astro Frontend (`apps/web`)
 
-All commands are run from the root of the project, from a terminal:
+From the repository root:
 
-| Command                           | Action                                           |
-| :-------------------------------- | :----------------------------------------------- |
-| `npm install`                     | Installs dependencies                            |
-| `npm run dev`                     | Starts local dev server at `localhost:4321`      |
-| `npm run build`                   | Build your production site to `./dist/`          |
-| `npm run preview`                 | Preview your build locally, before deploying     |
-| `npm run astro ...`               | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help`         | Get help using the Astro CLI                     |
-| `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
-| `npm wrangler tail`               | View real-time logs for all Workers              |
+```bash
+npm install
+npm run dev:web
+```
 
-## 👀 Want to learn more?
+`apps/web` falls back to `API_URL` (default `http://127.0.0.1:8787`) when running outside Cloudflare Workers.
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### 3. Seed Existing Markdown Posts & Images
 
-## Credit
+With the API running locally (or pointed at production):
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+```bash
+cd apps/api
+API_ADMIN_TOKEN=dev-secret-token uv run python scripts/seed_posts.py --api-url http://127.0.0.1:8787
+```
+
+---
+
+## Database Migrations (Alembic -> Cloudflare D1)
+
+1. Generate a new Alembic revision after editing `apps/api/src/models.py`:
+   ```bash
+   cd apps/api
+   uv run alembic revision --autogenerate -m "describe change"
+   ```
+2. Export the SQL migration for Wrangler D1:
+   ```bash
+   uv run python scripts/export_d1_migration.py --revision head --output migrations_d1/0002_change.sql
+   ```
+3. Apply locally or remotely:
+   ```bash
+   npx wrangler d1 migrations apply personal-website-db --local
+   npx wrangler d1 migrations apply personal-website-db --remote
+   ```
+
+---
+
+## One-Time Cloudflare & GitHub Setup for Auto-Deploy
+
+Every `git push` to `main` triggers `.github/workflows/deploy.yml`, which runs `pytest` and `npm run check --workspace=apps/web`, applies remote D1 migrations, and deploys both `apps/api` and `apps/web`.
+
+Before the first live deployment:
+
+1. **Create Cloudflare D1 Database** and update `database_id` in `apps/api/wrangler.jsonc`:
+   ```bash
+   npx wrangler d1 create personal-website-db
+   ```
+2. **Create Cloudflare R2 Bucket**:
+   ```bash
+   npx wrangler r2 bucket create personal-website-images
+   ```
+3. **Set Production Admin Token** on the API Worker:
+   ```bash
+   cd apps/api && npx wrangler secret put API_ADMIN_TOKEN
+   ```
+4. **Add GitHub Repository Secrets** (`Settings -> Secrets and variables -> Actions`):
+   - `CLOUDFLARE_API_TOKEN` (with Workers Scripts Edit, D1 Edit, and Workers R2 Storage Edit permissions)
+   - `CLOUDFLARE_ACCOUNT_ID`
