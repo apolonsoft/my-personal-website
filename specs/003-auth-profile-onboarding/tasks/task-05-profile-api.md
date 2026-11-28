@@ -1,5 +1,5 @@
 ### Task 05: Public & Authenticated Profile API Router
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Implement `/api/profile` endpoints (`GET /api/profile` for public site display, `GET /api/profile/me` and `PATCH /api/profile/me` for authenticated admin profile viewing and editing with R2 `avatar_key` validation) in `apps/api/src/routers/profile.py`, register in `apps/api/src/main.py`, and add tests in `apps/api/tests/test_profile.py`.
