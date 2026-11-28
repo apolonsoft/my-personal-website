@@ -1,11 +1,19 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import Page from "./Page.astro";
 import PostMeta from "../components/PostMeta.astro";
 import Icon from "../components/Icon.astro";
 import { profile } from "../constants";
 
-type Props = CollectionEntry<"blog">["data"];
+export interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+	updatedDate?: Date;
+	category: string;
+	heroImage: string;
+	imageAlt: string;
+}
+
 const { title, description, pubDate, category, heroImage, imageAlt } =
 	Astro.props;
 ---

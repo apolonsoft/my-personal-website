@@ -6,7 +6,9 @@ import Skills from "../components/Skills";
 import { profile } from "../constants";
 import { getPosts } from "../lib/posts";
 
-const recentPosts = (await getPosts()).slice(0, 2);
+export const prerender = false;
+
+const recentPosts = (await getPosts(Astro.locals)).slice(0, 2);
 ---
 
 <Page>

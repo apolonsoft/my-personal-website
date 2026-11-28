@@ -21,12 +21,15 @@
 		"@types/react": "^19.3.3",
 		"@types/react-dom": "^19.3.0",
 		"astro": "5.16.9",
+		"marked": "^18.3.0",
 		"react": "^19.3.1",
 		"react-dom": "^19.3.1",
+		"sanitize-html": "^2.18.2",
 		"tailwindcss": "^4.3.5",
 		"typescript": "5.9.3"
 	},
 	"devDependencies": {
+		"@types/sanitize-html": "^2.16.2",
 		"wrangler": "4.136.1"
 	},
 	"engines": {

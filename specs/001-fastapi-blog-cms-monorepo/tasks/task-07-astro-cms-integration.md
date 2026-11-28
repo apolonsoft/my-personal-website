@@ -1,5 +1,5 @@
 ### Task 07: Astro Frontend Integration with FastAPI CMS
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Connect `apps/web` to the `apps/api` FastAPI CMS backend so the homepage (`Recent writing`), `/blog/` index, `/blog/[...slug]/` post pages, and `/rss.xml` feed fetch live posts from D1 via a Cloudflare Service Binding (with local HTTP fallback) and render sanitized Markdown server-side on demand (`prerender = false`).

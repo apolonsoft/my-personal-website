@@ -4,7 +4,9 @@ import PostMeta from "../../components/PostMeta.astro";
 import { profile } from "../../constants";
 import { getPosts } from "../../lib/posts";
 
-const posts = await getPosts();
+export const prerender = false;
+
+const posts = await getPosts(Astro.locals);
 const description =
 	"Notes on building websites, designing interfaces, and the decisions in between.";
 ---
