@@ -1,5 +1,5 @@
 ### Task 04: Blog Posts CRUD API
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Implement the Blog Posts REST router (`GET`, `POST`, `PATCH`, `DELETE` under `/api/posts`) backed by SQLModel and the dual D1/SQLite session dependency, enforce Bearer token authentication on all write endpoints and draft visibility requests, register the router in `main.py`, and add thorough pytest integration tests.
