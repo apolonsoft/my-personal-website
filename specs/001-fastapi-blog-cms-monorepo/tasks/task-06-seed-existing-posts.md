@@ -1,5 +1,5 @@
 ### Task 06: Content Migration & Seeding Script
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Create an idempotent Python seeding script (`apps/api/scripts/seed_posts.py`) that parses the 4 existing Markdown blog posts in `apps/web/src/content/blog/`, uploads their referenced hero images from `apps/web/public/` to the FastAPI CMS `/api/images` endpoint (into R2 + D1), and creates the corresponding blog posts via `POST /api/posts`—skipping already-seeded slugs so the script can be safely re-run at any time.
