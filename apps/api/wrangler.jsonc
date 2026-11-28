@@ -24,7 +24,7 @@
 	],
 	"r2_buckets": [
 		{
-			"binding": "personal-website-images",
+			"binding": "IMAGES_BUCKET",
 			"bucket_name": "personal-website-images"
 		}
 	]

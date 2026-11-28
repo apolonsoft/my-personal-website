@@ -38,7 +38,7 @@ export async function apiFetch(
 	const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 	const serviceBinding = locals?.runtime?.env?.API;
 
-	if (serviceBinding) {
+	if (!import.meta.env.DEV && serviceBinding) {
 		return serviceBinding.fetch(
 			new Request(`https://api.internal${normalizedPath}`, init),
 		);
