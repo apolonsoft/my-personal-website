@@ -1,5 +1,5 @@
 ### Task 01: Preparatory Refactor — Monorepo Layout
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Reorganize the repository from a single-package Astro layout at the root into a workspace-based monorepo layout by moving the existing Astro application into `apps/web/`, adding a root npm workspaces `package.json`, and updating `.gitignore` for upcoming Python/uv/SQLite artifacts.

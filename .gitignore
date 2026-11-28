@@ -193,6 +193,7 @@ dist
 
 ### Wrangler ###
 .wrangler/
+apps/web/.wrangler/
 .env*
 !.env.example
 .dev.vars*
@@ -200,6 +201,18 @@ dist
 
 ### Astro ###
 .astro/
+apps/web/.astro/
+apps/web/dist/
+
+### Python / uv / SQLite ###
+**/.venv/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.uv-cache/
+*.db
+*.sqlite3
+apps/api/.dev.vars
 
 # graft's local graph cache — regenerable, not committed (run `graft build`).
 /graft/

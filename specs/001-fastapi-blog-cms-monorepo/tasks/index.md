@@ -5,7 +5,7 @@
 
 ## Task Checklist
 
-- [ ] **Task 01**: [Preparatory Refactor — Monorepo Layout](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-01-refactor-monorepo-layout.md) *(Zero functional changes)*
+- [x] **Task 01**: [Preparatory Refactor — Monorepo Layout](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-01-refactor-monorepo-layout.md) *(Zero functional changes)*
 - [ ] **Task 02**: [FastAPI Python Worker Scaffold & Config](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-02-api-worker-scaffold.md)
 - [ ] **Task 03**: [SQLModel Schema, Dual DB Engine & Alembic -> D1 Migrations](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-03-db-sqlmodel-alembic.md)
 - [ ] **Task 04**: [Blog Posts CRUD API](file:///home/ahmad/projects/my-personal-website/specs/001-fastapi-blog-cms-monorepo/tasks/task-04-posts-crud-api.md)
