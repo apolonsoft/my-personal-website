@@ -1,5 +1,5 @@
 ### Task 03: SQLModel Schema, Dual DB Engine & Alembic -> D1 Migrations
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Define the SQLModel database schema (`ImageAsset` and `Post`) and Pydantic API DTOs, implement the dual database session dependency supporting both Cloudflare D1 (`sqlalchemy-cloudflare-d1`) in Workers and standard SQLite in local dev/testing, configure Alembic for SQLModel autogeneration, and create a deterministic export script producing Wrangler-compatible D1 SQL migrations.

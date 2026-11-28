@@ -5,7 +5,12 @@ from collections.abc import Generator
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import Engine
+from sqlalchemy.pool import StaticPool
+from sqlmodel import Session, SQLModel, create_engine
 
+import src.models  # noqa: F401 - ensure SQLModel metadata includes all tables
+from src.database import get_session
 from src.main import app
 
 
@@ -17,7 +22,38 @@ def _set_test_env(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 @pytest.fixture()
-def client() -> Generator[TestClient, None, None]:
-    """Return a FastAPI TestClient instance."""
-    with TestClient(app) as test_client:
-        yield test_client
+def db_engine() -> Generator[Engine, None, None]:
+    """Create a fresh in-memory SQLite engine per test."""
+    engine = create_engine(
+        "sqlite://",
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
+    SQLModel.metadata.create_all(engine)
+    try:
+        yield engine
+    finally:
+        SQLModel.metadata.drop_all(engine)
+
+
+@pytest.fixture()
+def session(db_engine: Engine) -> Generator[Session, None, None]:
+    """Yield a SQLModel Session for direct test assertions."""
+    with Session(db_engine) as db_session:
+        yield db_session
+
+
+@pytest.fixture()
+def client(db_engine: Engine) -> Generator[TestClient, None, None]:
+    """Return a FastAPI TestClient wired to the isolated in-memory SQLite engine."""
+
+    def _override_session() -> Generator[Session, None, None]:
+        with Session(db_engine) as db_session:
+            yield db_session
+
+    app.dependency_overrides[get_session] = _override_session
+    try:
+        with TestClient(app) as test_client:
+            yield test_client
+    finally:
+        app.dependency_overrides.clear()
