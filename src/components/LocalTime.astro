@@ -1,19 +1,24 @@
 ---
-import { profile } from '../consts';
+import { profile } from "../constants";
 ---
-<span data-local-clock={profile.timeZone} class="tabular-nums">{profile.location}<span></span></span>
+
+<span data-local-clock={profile.timeZone} class="tabular-nums">
+	{profile.location}
+	<span></span>
+</span>
 
 <script>
-	const clock = document.querySelector<HTMLElement>('[data-local-clock]');
-	const time = clock?.querySelector('span');
+	const clock = document.querySelector<HTMLElement>("[data-local-clock]");
+	const time = clock?.querySelector("span");
 	if (clock && time) {
-		const formatter = new Intl.DateTimeFormat('en-US', {
+		const formatter = new Intl.DateTimeFormat("en-US", {
 			timeZone: clock.dataset.localClock,
-			hour: 'numeric',
-			minute: '2-digit',
+			hour: "numeric",
+			minute: "2-digit",
 		});
 		const update = () => {
-			time.textContent = ', ' + formatter.format(new Date()).toLowerCase();
+			time.textContent =
+				", " + formatter.format(new Date()).toLowerCase();
 		};
 		update();
 		window.setInterval(update, 10000);

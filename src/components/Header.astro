@@ -1,23 +1,25 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import LocalTime from './LocalTime.astro';
-import { profile } from '../consts';
+import HeaderLink from "./HeaderLink.astro";
+import { profile } from "../constants";
 ---
 
 <header class="bg-white">
 	<div class="page-shell flex min-h-18 items-center justify-between gap-5">
-		<a href="/" class="brand inline-flex items-center gap-2.5" aria-label={`${profile.name}, home`}>
+		<a
+			href="/"
+			class="brand inline-flex items-center gap-2.5"
+			aria-label={`${profile.name}, home`}
+		>
 			<img src="/favicon.svg" alt="" width="29" height="29" />
 			<span>{profile.name}.</span>
 		</a>
-		<nav aria-label="Main navigation" class="flex items-center gap-5 sm:gap-9">
+		<nav
+			aria-label="Main navigation"
+			class="flex items-center gap-5 sm:gap-9"
+		>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/#skills">Skills</HeaderLink>
 			<HeaderLink href="/blog/">Blog</HeaderLink>
 		</nav>
-		<div class="hidden items-center gap-2.5 text-sm sm:flex">
-			<span aria-hidden="true" class="size-2 rounded-full bg-signal-green"></span>
-			<LocalTime />
-		</div>
 	</div>
 </header>

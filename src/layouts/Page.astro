@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../constants";
 
 interface Props {
 	title?: string;
@@ -10,16 +10,27 @@ interface Props {
 	image?: string;
 	article?: boolean;
 }
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, image, article } = Astro.props;
+const {
+	title = SITE_TITLE,
+	description = SITE_DESCRIPTION,
+	image,
+	article,
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" id="top">
-	<head><BaseHead {title} {description} {image} {article} /></head>
+	<head>
+		<BaseHead {title} {description} {image} {article} />
+	</head>
 	<body>
-		<a class="skip-link" href="#main">Skip to content</a>
+		<a class="skip-link" href="#main">
+			Skip to content
+		</a>
 		<Header />
-		<main id="main" class="page-shell"><slot /></main>
+		<main id="main" class="page-shell">
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>

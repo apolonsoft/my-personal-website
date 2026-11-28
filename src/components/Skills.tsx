@@ -1,14 +1,15 @@
-import { skills } from "../consts";
+import { skills } from "../constants";
 
 const iconPaths = {
 	code: "m7.5 7-5 5 5 5m9-10 5 5-5 5m-3-14-3 18",
 	layout: "M4.5 3.5h15a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2zM2.5 9.5h19M10 9.5v11",
 	layers: "m12 2 10 5.5L12 13 2 7.5 12 2Zm-10 10L12 17.5 22 12M2 16.5 12 22l10-5.5",
+	sparkles: "M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Zm6.5 11 .9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6Z",
 };
 
 export default function Skills() {
 	return (
-		<ul className="mt-8 grid gap-4 md:grid-cols-3 md:gap-6 xl:gap-8">
+		<ul className="mt-8 grid gap-4 md:grid-cols-2 md:gap-6 xl:gap-8">
 			{skills.map((skill) => (
 				<li key={skill.title} className={`${skill.surface} flex min-h-48 flex-col justify-between gap-8 rounded-xl p-6 lg:min-h-52 lg:p-8`}>
 					<div>

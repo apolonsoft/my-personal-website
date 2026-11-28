@@ -1,30 +1,58 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import Page from './Page.astro';
-import PostMeta from '../components/PostMeta.astro';
-import Icon from '../components/Icon.astro';
-import { profile } from '../consts';
+import type { CollectionEntry } from "astro:content";
+import Page from "./Page.astro";
+import PostMeta from "../components/PostMeta.astro";
+import Icon from "../components/Icon.astro";
+import { profile } from "../constants";
 
-type Props = CollectionEntry<'blog'>['data'];
-const { title, description, pubDate, category, heroImage, imageAlt } = Astro.props;
+type Props = CollectionEntry<"blog">["data"];
+const { title, description, pubDate, category, heroImage, imageAlt } =
+	Astro.props;
 ---
 
-<Page title={`${title} — ${profile.name}`} {description} image={heroImage} article>
+<Page
+	title={`${title} — ${profile.name}`}
+	{description}
+	image={heroImage}
+	article
+>
 	<article class="pt-12 sm:pt-20">
 		<header class="mx-auto max-w-[52rem]">
-			<a class="text-link inline-flex items-center gap-2 text-sm font-medium" href="/blog/"><Icon name="arrow-left" size={16} /> All posts</a>
-			<h1 class="mt-8 text-[clamp(2.75rem,6vw,5.25rem)] leading-[1.02] font-bold tracking-[-0.045em]">{title}</h1>
+			<a
+				class="text-link inline-flex items-center gap-2 text-sm font-medium"
+				href="/blog/"
+			>
+				<Icon name="arrow-left" size={16} /> All posts
+			</a>
+			<h1 class="mt-8 text-[clamp(2.75rem,6vw,5.25rem)] leading-[1.02] font-bold tracking-[-0.045em]">
+				{title}
+			</h1>
 			<p class="lead mt-6 max-w-2xl">{description}</p>
 			<div class="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1">
 				<span class="text-sm font-medium">By {profile.name}</span>
-				<span aria-hidden="true" class="text-studio-ink/60">·</span>
+				<span aria-hidden="true" class="text-studio-ink/60">
+					·
+				</span>
 				<PostMeta {category} date={pubDate} />
 			</div>
 		</header>
-		<img class="mx-auto mt-10 aspect-[2/1] w-full max-w-[60rem] rounded-xl object-cover sm:mt-12" width="1280" height="640" src={heroImage} alt={imageAlt} />
-		<div class="article-body mx-auto mt-10 max-w-[42rem] sm:mt-16"><slot /></div>
+		<img
+			class="mx-auto mt-10 aspect-[2/1] w-full max-w-[60rem] rounded-xl object-cover sm:mt-12"
+			width="1280"
+			height="640"
+			src={heroImage}
+			alt={imageAlt}
+		/>
+		<div class="article-body mx-auto mt-10 max-w-[42rem] sm:mt-16">
+			<slot />
+		</div>
 	</article>
 	<div class="mx-auto mt-16 max-w-[42rem]">
-		<a class="inline-flex items-center gap-2 rounded-lg bg-studio-ink px-6 py-4 font-medium text-white hover:opacity-85" href="/blog/"><Icon name="arrow-left" size={18} /> Back to the blog</a>
+		<a
+			class="inline-flex items-center gap-2 rounded-lg bg-studio-ink px-6 py-4 font-medium text-white hover:opacity-85"
+			href="/blog/"
+		>
+			<Icon name="arrow-left" size={18} /> Back to the blog
+		</a>
 	</div>
 </Page>

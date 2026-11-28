@@ -1,38 +1,70 @@
 ---
-import Page from '../layouts/Page.astro';
-import Icon from '../components/Icon.astro';
-import PostMeta from '../components/PostMeta.astro';
-import Skills from '../components/Skills';
-import { profile } from '../consts';
-import { getPosts } from '../lib/posts';
+import Page from "../layouts/Page.astro";
+import Icon from "../components/Icon.astro";
+import PostMeta from "../components/PostMeta.astro";
+import Skills from "../components/Skills";
+import { profile } from "../constants";
+import { getPosts } from "../lib/posts";
 
 const recentPosts = (await getPosts()).slice(0, 2);
 ---
 
 <Page>
 	<section aria-labelledby="intro" class="pt-16 sm:pt-24">
-		<h1 id="intro" class="display">Developer by trade.<br />Designer at heart.</h1>
+		<h1 id="intro" class="display">
+			Developers by trade.
+			<br />
+			Designers at heart.
+		</h1>
 		<p class="lead mt-7 max-w-[580px] sm:mt-8">{profile.introduction}</p>
 	</section>
 
-	<section id="skills" aria-labelledby="skills-title" class="mt-18 scroll-mt-10 sm:mt-24">
-		<h2 id="skills-title" class="section-title">What I do</h2>
+	<section
+		id="skills"
+		aria-labelledby="skills-title"
+		class="mt-18 scroll-mt-10 sm:mt-24"
+	>
+		<h2 id="skills-title" class="section-title">
+			What we do
+		</h2>
 		<Skills />
 	</section>
 
 	<section aria-labelledby="writing-title" class="mt-18 sm:mt-24">
 		<div class="flex items-baseline justify-between gap-4">
-			<h2 id="writing-title" class="section-title">Recent writing</h2>
-			<a href="/blog/" class="text-link inline-flex shrink-0 items-center gap-2 font-medium">All posts <Icon name="arrow" size={18} /></a>
+			<h2 id="writing-title" class="section-title">
+				Recent writing
+			</h2>
+			<a
+				href="/blog/"
+				class="text-link inline-flex shrink-0 items-center gap-2 font-medium"
+			>
+				All posts <Icon name="arrow" size={18} />
+			</a>
 		</div>
 		<ul class="mt-8 grid gap-9 sm:grid-cols-2 sm:gap-8">
 			{recentPosts.map(({ id, data }) => (
 				<li>
 					<a href={`/blog/${id}/`} class="group block">
-						<img class="aspect-video w-full rounded-xl object-cover" src={data.heroImage} width="1280" height="720" alt="" loading="lazy" />
-						<div class="mt-4"><PostMeta category={data.category} date={data.pubDate} /></div>
+						<img
+							class="aspect-video w-full rounded-xl object-cover"
+							src={data.heroImage}
+							width="1280"
+							height="720"
+							alt=""
+							loading="lazy"
+						/>
+						<div class="mt-4">
+							<PostMeta
+								category={data.category}
+								date={data.pubDate}
+							/>
+						</div>
 						<h3 class="mt-2 flex items-baseline justify-between gap-4 text-2xl leading-tight font-semibold tracking-tight group-hover:underline">
-							{data.title}<span class="shrink-0"><Icon name="arrow-up-right" size={18} /></span>
+							{data.title}
+							<span class="shrink-0">
+								<Icon name="arrow-up-right" size={18} />
+							</span>
 						</h3>
 					</a>
 				</li>

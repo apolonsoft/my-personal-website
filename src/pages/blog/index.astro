@@ -1,11 +1,12 @@
 ---
-import Page from '../../layouts/Page.astro';
-import PostMeta from '../../components/PostMeta.astro';
-import { profile } from '../../consts';
-import { getPosts } from '../../lib/posts';
+import Page from "../../layouts/Page.astro";
+import PostMeta from "../../components/PostMeta.astro";
+import { profile } from "../../constants";
+import { getPosts } from "../../lib/posts";
 
 const posts = await getPosts();
-const description = 'Notes on building websites, designing interfaces, and the decisions in between.';
+const description =
+	"Notes on building websites, designing interfaces, and the decisions in between.";
 ---
 
 <Page title={`Blog — ${profile.name}`} {description}>
@@ -16,13 +17,29 @@ const description = 'Notes on building websites, designing interfaces, and the d
 	<ul aria-label="Blog posts" class="border-t border-studio-ink/40">
 		{posts.map(({ id, data }) => (
 			<li class="border-b border-studio-ink/30">
-				<a class="group grid grid-cols-[minmax(0,1fr)_80px] items-center gap-4 py-7 sm:grid-cols-[minmax(0,1fr)_190px] sm:gap-10 sm:py-8" href={`/blog/${id}/`}>
+				<a
+					class="group grid grid-cols-[minmax(0,1fr)_80px] items-center gap-4 py-7 sm:grid-cols-[minmax(0,1fr)_190px] sm:gap-10 sm:py-8"
+					href={`/blog/${id}/`}
+				>
 					<div>
-						<PostMeta category={data.category} date={data.pubDate} />
-						<h2 class="mt-2 text-[22px] leading-tight font-semibold tracking-[-0.035em] group-hover:underline sm:text-3xl">{data.title}</h2>
-						<p class="mt-2 max-w-2xl text-base text-studio-ink/75">{data.description}</p>
+						<PostMeta
+							category={data.category}
+							date={data.pubDate}
+						/>
+						<h2 class="mt-2 text-[22px] leading-tight font-semibold tracking-[-0.035em] group-hover:underline sm:text-3xl">
+							{data.title}
+						</h2>
+						<p class="mt-2 max-w-2xl text-base text-studio-ink/75">
+							{data.description}
+						</p>
 					</div>
-					<img class="aspect-square w-full rounded-xl object-cover sm:aspect-[1.6]" width="320" height="200" src={data.heroImage} alt="" />
+					<img
+						class="aspect-square w-full rounded-xl object-cover sm:aspect-[1.6]"
+						width="320"
+						height="200"
+						src={data.heroImage}
+						alt=""
+					/>
 				</a>
 			</li>
 		))}
