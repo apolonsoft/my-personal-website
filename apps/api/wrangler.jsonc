@@ -3,7 +3,9 @@
 	"name": "my-personal-website-api",
 	"main": "src/main.py",
 	"compatibility_date": "2025-10-08",
-	"compatibility_flags": ["python_workers"],
+	"compatibility_flags": [
+		"python_workers"
+	],
 	"observability": {
 		"enabled": true
 	},
@@ -16,13 +18,13 @@
 			"binding": "DB",
 			"database_name": "personal-website-db",
 			// Replace with the UUID returned by: npx wrangler d1 create personal-website-db
-			"database_id": "00000000-0000-0000-0000-000000000000",
+			"database_id": "2e927b58-6d59-47a2-9844-88a4acb23889",
 			"migrations_dir": "migrations_d1"
 		}
 	],
 	"r2_buckets": [
 		{
-			"binding": "IMAGES_BUCKET",
+			"binding": "personal-website-images",
 			"bucket_name": "personal-website-images"
 		}
 	]
