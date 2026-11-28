@@ -23,40 +23,40 @@ my-personal-website/
 
 ## Local Development
 
-### 1. Start the FastAPI Backend (`apps/api`)
+### 1. First-Time Local Setup
 
 ```bash
-cd apps/api
-cp .dev.vars.example .dev.vars
-uv sync
-uv run pywrangler dev
+npm install
+cd apps/api && cp .dev.vars.example .dev.vars && uv sync && cd ../..
+npm run db:migrate:local
+```
+
+### 2. Start Both Backend & Frontend (`npm run dev`)
+
+From the repository root:
+
+```bash
+npm run dev
+```
+
+This starts:
+- **`[api]`** FastAPI Python Worker at `http://127.0.0.1:8787`
+- **`[web]`** Astro SSR frontend at `http://localhost:4321`
+
+*(You can also run them individually with `npm run dev:api` and `npm run dev:web`.)*
+
+### 3. Seed Existing Markdown Posts & Images
+
+With `npm run dev` running in another terminal:
+
+```bash
+npm run seed:local
 ```
 
 Or run backend tests:
 
 ```bash
-cd apps/api
-uv run pytest -v
-```
-
-### 2. Start the Astro Frontend (`apps/web`)
-
-From the repository root:
-
-```bash
-npm install
-npm run dev:web
-```
-
-`apps/web` falls back to `API_URL` (default `http://127.0.0.1:8787`) when running outside Cloudflare Workers.
-
-### 3. Seed Existing Markdown Posts & Images
-
-With the API running locally (or pointed at production):
-
-```bash
-cd apps/api
-API_ADMIN_TOKEN=dev-secret-token uv run python scripts/seed_posts.py --api-url http://127.0.0.1:8787
+cd apps/api && uv run pytest -v
 ```
 
 ---

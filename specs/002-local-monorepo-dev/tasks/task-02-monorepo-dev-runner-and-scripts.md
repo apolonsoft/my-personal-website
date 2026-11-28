@@ -1,5 +1,5 @@
 ### Task 02: Monorepo Dev Runner & Root Scripts
-- [ ] Pending
+- [x] Completed
 
 #### Full Description
 Add a zero-dependency Node process runner (`scripts/dev.mjs`) and root `package.json` scripts (`dev`, `dev:api`, `dev:web`, `db:migrate:local`, `seed:local`) so both `apps/api` and `apps/web` start with a single `npm run dev` command, and update `README.md`.
